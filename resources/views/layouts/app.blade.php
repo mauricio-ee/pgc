@@ -35,6 +35,8 @@
 
             <!-- Alerta de Cookies Sostenible -->
             <x-cookies-banner />
+
+            <x-chatbot />
         </div>
         @stack('scripts')
     </body>

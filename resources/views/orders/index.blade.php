@@ -28,7 +28,7 @@
                                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                                     <div>
                                         <span class="text-gray-600 font-semibold block text-xs uppercase tracking-wide">Pedido</span>
-                                        <span class="text-green-700 font-bold text-xl block">#{{{ $order->id }}}}</span>
+                                        <span class="text-green-700 font-bold text-xl block">#{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</span>
                                     </div>
                                     <div>
                                         <span class="text-gray-600 font-semibold block text-xs uppercase tracking-wide">Fecha</span>
@@ -55,6 +55,36 @@
                                         </span>
                                     </div>
                                 </div>
+                            </div>
+
+                            @php
+                                $trackingSteps = [
+                                    'paid' => 'Pago confirmado',
+                                    'shipped' => 'En camino',
+                                    'delivered' => 'Entregado',
+                                ];
+                                $trackingStatuses = array_keys($trackingSteps);
+                                $currentStep = array_search($order->status, $trackingStatuses, true);
+                            @endphp
+                            <div class="border-b border-gray-100 px-6 py-5">
+                                @if($order->status === 'cancelled')
+                                    <div class="flex items-center gap-3 rounded-lg bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+                                        <span aria-hidden="true">!</span>
+                                        Este pedido fue cancelado.
+                                    </div>
+                                @else
+                                    <ol class="grid grid-cols-3 gap-2" aria-label="Seguimiento del pedido">
+                                        @foreach($trackingSteps as $status => $label)
+                                            @php $isComplete = $currentStep !== false && $loop->index <= $currentStep; @endphp
+                                            <li class="text-center text-xs font-semibold {{ $isComplete ? 'text-green-700' : 'text-gray-400' }}">
+                                                <div class="mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-full {{ $isComplete ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-400' }}">
+                                                    {{ $isComplete ? '✓' : $loop->iteration }}
+                                                </div>
+                                                {{ $label }}
+                                            </li>
+                                        @endforeach
+                                    </ol>
+                                @endif
                             </div>
                             
                             <!-- Order Items -->

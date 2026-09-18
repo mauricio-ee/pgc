@@ -28,10 +28,16 @@
                             <option value="name" @selected(request('sort') === 'name')>Nombre A-Z</option>
                         </select>
                         <button type="submit" class="rounded-lg bg-emerald-800 px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-emerald-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2">
-                            Buscar
+                            Buscar productos
                         </button>
                     </div>
                 </form>
+            </div>
+            <div class="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-emerald-900">
+                <p>{{ $products->total() }} {{ $products->total() === 1 ? 'producto encontrado' : 'productos encontrados' }}</p>
+                @if(request()->hasAny(['search', 'min_price', 'max_price', 'sort', 'categoria']))
+                    <a href="{{ route('products.index') }}" class="font-semibold underline underline-offset-4 hover:text-emerald-700">Limpiar filtros</a>
+                @endif
             </div>
         </div>
     </div>
@@ -78,7 +84,11 @@
                                     @endif
                                     
                                     <!-- Stock Badge -->
-                                    @if($product->stock < 5)
+                                    @if($product->stock === 0)
+                                        <div class="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                            Sin stock
+                                        </div>
+                                    @elseif($product->stock < 5)
                                         <div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
                                             ¡Quedan {{$product->stock}}!
                                         </div>

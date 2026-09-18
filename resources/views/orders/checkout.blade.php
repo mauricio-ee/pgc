@@ -115,7 +115,11 @@
                             <div class="border-t border-gray-200 pt-4 mb-6 space-y-2">
                                 <div class="flex justify-between text-sm text-gray-600">
                                     <span>Subtotal:</span>
-                                    <span>${{ number_format($total * 0.95, 2) }}</span>
+                                    <span>${{ number_format($total, 2) }}</span>
+                                </div>
+                                <div class="flex justify-between text-sm text-gray-600">
+                                    <span>Envío:</span>
+                                    <span class="font-semibold text-green-600">Gratis</span>
                                 </div>
                                 <div class="flex justify-between text-2xl font-extrabold text-green-600">
                                     <span>Total:</span>
