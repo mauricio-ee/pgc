@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
         'avatar',
         'bio',
         'phone',
@@ -56,9 +57,44 @@ class User extends Authenticatable
         return $this->role === $role;
     }
 
+    public const ROLES = [
+        'customer',
+        'seller',
+        'support',
+        'order_manager',
+        'moderator',
+        'farmer_verifier',
+        'payment_manager',
+        'quality_manager',
+        'promotion_manager',
+        'analyst',
+        'admin',
+        'super_admin',
+        'technician',
+        'certifier',
+    ];
+
+    public function isStaff(): bool
+    {
+        return in_array($this->role, [
+            'support',
+            'order_manager',
+            'moderator',
+            'farmer_verifier',
+            'payment_manager',
+            'quality_manager',
+            'promotion_manager',
+            'analyst',
+            'admin',
+            'super_admin',
+            'technician',
+            'certifier',
+        ], true);
+    }
+
     public function isAdmin()
     {
-        return $this->role === 'admin';
+        return in_array($this->role, ['admin', 'super_admin'], true);
     }
 
     public function isSeller()

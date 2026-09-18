@@ -79,5 +79,36 @@ class DatabaseSeeder extends Seeder
                 ['name' => $cat['name'], 'description' => $cat['description']]
             );
         }
+
+        // Perfiles de prueba para validar cada área de la plataforma.
+        $perfilesDePrueba = [
+            'customer' => 'Cliente de Prueba',
+            'seller' => 'Agricultor de Prueba',
+            'support' => 'Soporte de Prueba',
+            'order_manager' => 'Gestor de Pedidos de Prueba',
+            'moderator' => 'Moderador de Prueba',
+            'farmer_verifier' => 'Verificador de Agricultores de Prueba',
+            'payment_manager' => 'Gestor de Pagos de Prueba',
+            'quality_manager' => 'Encargado de Calidad de Prueba',
+            'promotion_manager' => 'Gestor de Promociones de Prueba',
+            'analyst' => 'Analista de Prueba',
+            'admin' => 'Administrador de Prueba',
+            'super_admin' => 'Superadministrador de Prueba',
+            'technician' => 'Técnico de Prueba',
+            'certifier' => 'Certificador de Prueba',
+        ];
+
+        foreach ($perfilesDePrueba as $role => $name) {
+            User::updateOrCreate(
+                ['email' => "prueba-{$role}@ecoventa.test"],
+                [
+                    'name' => $name,
+                    'password' => bcrypt('password'),
+                    'role' => $role,
+                    'phone' => '3000000000',
+                    'bio' => "Perfil de prueba para el rol {$role}.",
+                ]
+            );
+        }
     }
 }

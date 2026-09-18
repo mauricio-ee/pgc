@@ -73,11 +73,20 @@ Route::middleware(['auth', 'role:seller'])->prefix('vendedor')->name('seller.')-
 });
 
 // Panel de Administrador
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'role:admin,super_admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('categorias', CategoryController::class);
     // Además gestión global
     Route::get('pedidos', [OrderController::class, 'adminIndex'])->name('orders.all');
+    Route::post('pedidos/{order}/transferencia/pagar', [PaymentController::class, 'markTransferAsPaid'])->name('orders.transfer.pay');
 });
+
+// Panel común para los perfiles internos de la plataforma
+Route::get('/equipo', function () {
+    return view('staff.dashboard');
+})->middleware([
+    'auth',
+    'role:support,order_manager,moderator,farmer_verifier,payment_manager,quality_manager,promotion_manager,analyst,super_admin,technician,certifier',
+])->name('staff.dashboard');
 
 require __DIR__.'/auth.php';

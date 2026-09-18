@@ -81,6 +81,12 @@
                             </x-nav-link>
                         @endif
 
+                        @if(Auth::user()->isStaff() && !Auth::user()->isAdmin())
+                            <x-nav-link :href="route('staff.dashboard')" :active="request()->routeIs('staff.*')" class="text-slate-600 hover:text-emerald-800">
+                                {{ __('Panel de Equipo') }}
+                            </x-nav-link>
+                        @endif
+
                     @endauth
                 </div>
             </div>

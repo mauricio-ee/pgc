@@ -105,7 +105,8 @@ class PaymentController extends Controller
             MercadoPagoConfig::setAccessToken(config('services.mercado_pago.access_token'));
 
             // Preparar items para Mercado Pago
-            $items = [];
+            report($e);
+            return back()->with('error', 'No se pudo iniciar el pago. Inténtalo de nuevo.');
             foreach ($order->items as $item) {
                 $items[] = [
                     'id' => (string) $item->id,
@@ -267,7 +268,11 @@ class PaymentController extends Controller
 
         preg_match('/(?:^|,)ts=([^,]+)/', $signature, $timestamp);
         preg_match('/(?:^|,)v1=([^,]+)/', $signature, $hash);
-        if (empty($timestamp[1]) || empty($hash[1])) {
+        if (empty($timestamp[1]) || empty($hash[1]) || !ctype_digit($timestamp[1])) {
+            return false;
+        }
+
+        if (abs(now()->timestamp - (int) $timestamp[1]) > 300) {
             return false;
         }
 
@@ -286,6 +291,14 @@ class PaymentController extends Controller
                 return;
             }
 
+            $items = $order->items()->lockForUpdate()->get();
+            foreach ($items as $item) {
+                $product = Product::whereKey($item->product_id)->lockForUpdate()->firstOrFail();
+                if ($product->stock < $item->quantity) {
+                    throw new \RuntimeException("Stock insuficiente para el producto {$product->name}");
+                }
+            }
+
             // Marcar pago como completado
             $payment->markAsPaid($transactionId);
 
@@ -293,8 +306,8 @@ class PaymentController extends Controller
             $order->update(['status' => 'paid']);
 
             // Decrementar stock
-            foreach ($order->items as $item) {
-                $item->product->decrement('stock', $item->quantity);
+            foreach ($items as $item) {
+                Product::whereKey($item->product_id)->decrement('stock', $item->quantity);
             }
 
             // Enviar email de confirmación
@@ -307,7 +320,7 @@ class PaymentController extends Controller
      */
     public function markTransferAsPaid(Order $order)
     {
-        if (!auth()->user()->is_admin) {
+        if (!auth()->user()->isAdmin()) {
             return response()->json(['error' => 'No autorizado'], 403);
         }
 
@@ -317,6 +330,6 @@ class PaymentController extends Controller
             $this->completeOrder($order, $payment, 'TRANSFER-' . now()->timestamp);
         });
 
-        return redirect()->route('orders.index')->with('success', 'Pago verificado y orden procesada');
+        return redirect()->route('admin.orders.all')->with('success', 'Pago verificado y orden procesada');
     }
 }
