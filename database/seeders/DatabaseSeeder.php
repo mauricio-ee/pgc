@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -109,6 +110,35 @@ class DatabaseSeeder extends Seeder
                     'bio' => "Perfil de prueba para el rol {$role}.",
                 ]
             );
+        }
+
+        $vendedoresDePrueba = User::where('role', 'seller')->get();
+        $productosDePrueba = [
+            ['name' => 'Tomates orgánicos', 'category' => 'Frutas Frescas', 'price' => 12.50, 'stock' => 40, 'description' => 'Tomates frescos cultivados localmente sin pesticidas sintéticos.'],
+            ['name' => 'Lechuga hidropónica', 'category' => 'Verduras y Hortalizas', 'price' => 6.00, 'stock' => 35, 'description' => 'Lechuga crujiente, cosechada el mismo día y lista para tus ensaladas.'],
+            ['name' => 'Miel artesanal', 'category' => 'Mermeladas y Conservas', 'price' => 18.90, 'stock' => 24, 'description' => 'Miel natural de productores locales, envasada artesanalmente.'],
+            ['name' => 'Semillas de chía', 'category' => 'Cereales y Semillas', 'price' => 9.50, 'stock' => 50, 'description' => 'Semillas seleccionadas para complementar una alimentación saludable.'],
+            ['name' => 'Compost natural', 'category' => 'Abonos y Fertilizantes', 'price' => 15.00, 'stock' => 18, 'description' => 'Abono orgánico para nutrir huertos y jardines de forma responsable.'],
+            ['name' => 'Plantines de albahaca', 'category' => 'Plantas y Plantines', 'price' => 7.25, 'stock' => 30, 'description' => 'Plantines aromáticos listos para cultivar en casa.'],
+        ];
+
+        foreach ($vendedoresDePrueba as $vendedorDePrueba) {
+            foreach ($productosDePrueba as $productoDePrueba) {
+                $category = Category::where('name', $productoDePrueba['category'])->firstOrFail();
+                Product::updateOrCreate(
+                    ['slug' => Str::slug($productoDePrueba['name']) . '-' . $vendedorDePrueba->id],
+                    [
+                        'user_id' => $vendedorDePrueba->id,
+                        'category_id' => $category->id,
+                        'name' => $productoDePrueba['name'],
+                        'description' => $productoDePrueba['description'],
+                        'price' => $productoDePrueba['price'],
+                        'stock' => $productoDePrueba['stock'],
+                        'is_eco_certified' => true,
+                        'is_active' => true,
+                    ]
+                );
+            }
         }
     }
 }
