@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -84,6 +86,101 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         return view('products.create', compact('categories'));
+    }
+
+    public function bulkCreate()
+    {
+        return view('products.bulk_create', ['categories' => Category::orderBy('name')->get()]);
+    }
+
+    public function bulkStore(Request $request)
+    {
+        $request->validate([
+            'file' => ['required', 'file', 'mimes:csv,txt', 'max:2048'],
+        ]);
+
+        $handle = fopen($request->file('file')->getRealPath(), 'r');
+        $headers = fgetcsv($handle, 0, ',');
+        $expectedHeaders = ['name', 'description', 'price', 'stock', 'category'];
+
+        if (!$headers || array_map(fn ($header) => strtolower(trim($header)), $headers) !== $expectedHeaders) {
+            fclose($handle);
+            return back()->withErrors(['file' => 'El CSV debe tener las columnas exactas: name, description, price, stock, category.']);
+        }
+
+        $categories = Category::all()->keyBy(fn ($category) => Str::lower($category->slug));
+        $categoriesByName = Category::all()->keyBy(fn ($category) => Str::lower($category->name));
+        $rows = [];
+        $errors = [];
+        $line = 1;
+        $limitExceeded = false;
+
+        while (($data = fgetcsv($handle, 0, ',')) !== false) {
+            $line++;
+            if (count(array_filter($data, fn ($value) => trim((string) $value) !== '')) === 0) {
+                continue;
+            }
+
+            if (count($data) !== count($expectedHeaders)) {
+                $errors[] = "Línea {$line}: debe tener cinco columnas.";
+                continue;
+            }
+
+            $row = array_combine($expectedHeaders, array_map('trim', $data));
+            $validator = Validator::make($row, [
+                'name' => ['required', 'string', 'max:255'],
+                'description' => ['required', 'string', 'max:5000'],
+                'price' => ['required', 'numeric', 'min:0'],
+                'stock' => ['required', 'integer', 'min:0'],
+                'category' => ['required', 'string', 'max:255'],
+            ]);
+
+            $category = $categories->get(Str::lower($row['category'])) ?? $categoriesByName->get(Str::lower($row['category']));
+            if (!$category) {
+                $validator->after(fn ($validation) => $validation->errors()->add('category', 'La categoría no existe.'));
+            }
+
+            if ($validator->fails()) {
+                $errors[] = "Línea {$line}: " . implode(' ', $validator->errors()->all());
+                continue;
+            }
+
+            $rows[] = [
+                'user_id' => auth()->id(),
+                'category_id' => $category->id,
+                'name' => $row['name'],
+                'slug' => Str::slug($row['name']) . '-' . Str::random(8),
+                'description' => $row['description'],
+                'price' => $row['price'],
+                'stock' => $row['stock'],
+                'is_eco_certified' => true,
+                'is_active' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+
+            if (count($rows) >= 100) {
+                while (($extraRow = fgetcsv($handle, 0, ',')) !== false) {
+                    if (count(array_filter($extraRow, fn ($value) => trim((string) $value) !== '')) > 0) {
+                        $limitExceeded = true;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        fclose($handle);
+
+        if ($errors || !$rows) {
+            if ($limitExceeded) {
+                $errors[] = 'El archivo supera el máximo de 100 productos.';
+            }
+            return back()->withErrors(['file' => array_merge($errors, !$rows ? ['No se encontró ninguna fila válida.'] : [])]);
+        }
+
+        DB::transaction(fn () => Product::insert($rows));
+
+        return redirect()->route('seller.productos.index')->with('success', count($rows) . ' productos publicados correctamente.');
     }
 
     /**

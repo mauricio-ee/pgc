@@ -69,6 +69,8 @@ Route::middleware('auth')->group(function () {
 // Panel de Vendedor
 Route::middleware(['auth', 'role:seller'])->prefix('vendedor')->name('seller.')->group(function () {
     Route::get('productos/mios', [ProductController::class, 'sellerIndex'])->name('productos.index');
+    Route::get('productos/carga-multiple', [ProductController::class, 'bulkCreate'])->name('productos.bulk.create');
+    Route::post('productos/carga-multiple', [ProductController::class, 'bulkStore'])->name('productos.bulk.store');
     Route::resource('productos', ProductController::class)->except(['index', 'show']);
 });
 
