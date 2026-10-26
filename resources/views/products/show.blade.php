@@ -79,9 +79,9 @@
                             </h1>
                             <div class="flex items-baseline gap-2">
                                 <span class="text-5xl font-bold text-green-600">
-                                    ${{ number_format($product->price, 0) }}
+                                    {{ cop($product->price) }}
                                 </span>
-                                <span class="text-lg text-gray-500">por unidad</span>
+                                <span class="text-lg text-gray-500">COP por unidad</span>
                             </div>
                         </div>
 

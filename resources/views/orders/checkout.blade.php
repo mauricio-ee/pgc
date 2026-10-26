@@ -107,7 +107,7 @@
                                             <span class="text-gray-600 block">{{ $cart[$product->id]['quantity'] }}x</span>
                                             <span class="text-gray-700 font-medium truncate block">{{ $product->name }}</span>
                                         </div>
-                                        <span class="font-bold text-gray-900 flex-shrink-0">${{ number_format($product->price * $cart[$product->id]['quantity'], 2) }}</span>
+                                        <span class="font-bold text-gray-900 flex-shrink-0">{{ cop($product->price * $cart[$product->id]['quantity']) }}</span>
                                     </div>
                                 @endforeach
                             </div>
@@ -115,7 +115,7 @@
                             <div class="border-t border-gray-200 pt-4 mb-6 space-y-2">
                                 <div class="flex justify-between text-sm text-gray-600">
                                     <span>Subtotal:</span>
-                                    <span>${{ number_format($total, 2) }}</span>
+                                    <span>{{ cop($total) }}</span>
                                 </div>
                                 <div class="flex justify-between text-sm text-gray-600">
                                     <span>Envío:</span>
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="flex justify-between text-2xl font-extrabold text-green-600">
                                     <span>Total:</span>
-                                    <span>${{ number_format($total, 2) }}</span>
+                                    <span>{{ cop($total) }}</span>
                                 </div>
                             </div>
                             

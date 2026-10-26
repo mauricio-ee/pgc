@@ -77,7 +77,7 @@
                                 </td>
                                 @foreach($products as $product)
                                     <td class="px-6 py-4 whitespace-nowrap text-center text-xl font-bold text-green-700">
-                                        ${{ number_format($product->price, 2) }}
+                                        {{ cop($product->price) }}
                                     </td>
                                 @endforeach
                             </tr>

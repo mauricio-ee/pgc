@@ -8,13 +8,13 @@
             let response = 'Puedo ayudarte con compras, envíos, pagos y seguimiento de pedidos. Prueba una de las opciones disponibles.';
 
             if (normalized.includes('compr')) {
-                response = 'Explora el catálogo, abre un producto, elige la cantidad y pulsa "Agregar al carrito". Desde el carrito puedes finalizar la compra.';
+                response = 'Explora el catálogo, abre un producto, elige la cantidad y pulsa Agregar al carrito. Desde el carrito puedes finalizar la compra.';
             } else if (normalized.includes('env')) {
                 response = 'El envío ecológico es gratuito. La disponibilidad y fecha estimada aparecen en la ficha del producto.';
             } else if (normalized.includes('pago')) {
                 response = 'Puedes pagar mediante Mercado Pago o transferencia bancaria desde el checkout.';
             } else if (normalized.includes('pedido')) {
-                response = 'Puedes consultar tus pedidos y su estado desde "Mis Pedidos" en el menú de tu cuenta.';
+                response = 'Puedes consultar tus pedidos y su estado desde Mis Pedidos en el menú de tu cuenta.';
             }
 
             this.messages.push({ from: 'user', text: question });
@@ -31,7 +31,7 @@
                 <p class="font-bold">Asistente EcoVenta</p>
                 <p class="text-xs text-emerald-100">Ayuda rápida</p>
             </div>
-            <button type="button" @click="open = false" class="rounded-md p-1 text-emerald-100 hover:bg-emerald-700 hover:text-white" aria-label="Cerrar asistente">×</button>
+            <button type="button" @click="open = false" class="rounded-md p-1 text-emerald-100 hover:bg-emerald-700 hover:text-white" aria-label="Minimizar asistente">−</button>
         </div>
 
         <div class="max-h-72 space-y-3 overflow-y-auto bg-slate-50 p-4" aria-live="polite">

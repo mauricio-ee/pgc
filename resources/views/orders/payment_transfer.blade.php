@@ -27,7 +27,7 @@
                         </div>
                         <div class="flex justify-between">
                             <span>Total a Pagar:</span>
-                            <span class="font-bold text-2xl text-green-600">${{ number_format($order->total_amount, 2) }}</span>
+                            <span class="font-bold text-2xl text-green-600">{{ cop($order->total_amount) }}</span>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
 
                         <div class="bg-white p-4 rounded-lg">
                             <p class="text-gray-600 text-sm mb-1">Monto:</p>
-                            <p class="text-gray-900 font-bold text-2xl text-green-600">${{ number_format($order->total_amount, 2) }}</p>
+                            <p class="text-gray-900 font-bold text-2xl text-green-600">{{ cop($order->total_amount) }}</p>
                         </div>
                     </div>
                 </div>

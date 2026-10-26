@@ -14,7 +14,7 @@
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex items-center justify-between">
                     <div>
                         <p class="text-sm font-bold text-gray-500 uppercase tracking-widest">Ingresos Totales</p>
-                        <h3 class="text-3xl font-extrabold text-green-700 mt-2">${{ number_format($totalSales, 2) }}</h3>
+                        <h3 class="text-3xl font-extrabold text-green-700 mt-2">{{ cop($totalSales) }}</h3>
                         <span class="text-xs text-gray-400 mt-1 block">Generado en total (histórico)</span>
                     </div>
                     <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-3xl">
@@ -79,7 +79,7 @@
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <p class="font-extrabold text-green-700">${{ number_format($item->total_revenue, 2) }}</p>
+                                            <p class="font-extrabold text-green-700">{{ cop($item->total_revenue) }}</p>
                                         </div>
                                     </li>
                                 @endforeach
@@ -139,7 +139,7 @@
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-extrabold text-green-700">
-                                            ${{ number_format($recent->price * $recent->quantity, 2) }}
+                                            {{ cop($recent->price * $recent->quantity) }}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -170,7 +170,7 @@
                     data: {
                         labels: {!! json_encode($chartDates) !!}, // Días 
                         datasets: [{
-                            label: 'Ingresos diarios ($)',
+                            label: 'Ingresos diarios (COP)',
                             data: {!! json_encode($chartTotals) !!}, // Totales ganados
                             borderColor: '#15803d', // green-700
                             backgroundColor: 'rgba(34, 197, 94, 0.1)', // green-500 suave
@@ -212,7 +212,7 @@
                                     font: { size: 11, family: 'system-ui' },
                                     color: '#9ca3af',
                                     callback: function(value) {
-                                        return '$' + value;
+                                        return '$' + value.toLocaleString('es-CO');
                                     }
                                 }
                             },

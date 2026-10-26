@@ -28,7 +28,7 @@
                                 <div class="p-5">
                                     <p class="text-xs font-bold uppercase tracking-wide text-emerald-800">{{ $product->category?->name ?? 'Producto local' }}</p>
                                     <h3 class="mt-2 text-lg font-bold text-slate-900">{{ $product->name }}</h3>
-                                    <p class="mt-2 text-2xl font-bold text-emerald-800">${{ number_format($product->price, 2) }}</p>
+                                    <p class="mt-2 text-2xl font-bold text-emerald-800">{{ cop($product->price) }}</p>
                                 </div>
                             </a>
                             <form action="{{ route('favorites.destroy', $product) }}" method="POST" class="border-t border-slate-100 p-4">

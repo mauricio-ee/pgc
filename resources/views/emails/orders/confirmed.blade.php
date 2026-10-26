@@ -9,9 +9,9 @@ A continuación tienes el resumen de tu pedido **#{{ str_pad($order->id, 5, '0',
 | Producto | Cantidad | Precio Unitario | Subtotal |
 |:---------|:--------:|:----------------|---------:|
 @foreach($order->items as $item)
-| {{ $item->product->name }} | {{ $item->quantity }} | ${{ number_format($item->price, 2) }} | ${{ number_format($item->price * $item->quantity, 2) }} |
+| {{ $item->product->name }} | {{ $item->quantity }} | {{ cop($item->price) }} | {{ cop($item->price * $item->quantity) }} |
 @endforeach
-| **Total** | | | **${{ number_format($order->total_amount, 2) }}** |
+| **Total** | | | **{{ cop($order->total_amount) }}** |
 </x-mail::table>
 
 **Dirección de Envío:**  

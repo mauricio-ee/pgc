@@ -264,10 +264,10 @@
                         </div>
 
                         <div class="mb-2">
-                            <span class="text-4xl font-light text-gray-900">${{ number_format($product->price, 2) }}</span>
+                            <span class="text-4xl font-light text-gray-900">{{ cop($product->price) }}</span>
                         </div>
                         <div class="text-sm text-gray-900 mb-6">
-                            en <span class="font-semibold text-green-600">12 cuotas de ${{ number_format($product->price / 12, 2) }}</span>
+                            en <span class="font-semibold text-green-600">12 cuotas de {{ cop($product->price / 12) }}</span>
                         </div>
 
                         <div class="mb-6">

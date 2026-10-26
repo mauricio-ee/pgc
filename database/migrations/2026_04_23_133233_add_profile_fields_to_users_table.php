@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -17,10 +18,8 @@ return new class extends Migration
             $table->string('phone', 20)->nullable();
         });
         
-        // Convertir el ENUM a STRING para poder admitir 'certifier' 
-        // Verificamos si estamos usando SQLite o MySQL antes de mandar la instruccion raw
-        if (config('database.default') !== 'sqlite' && config('database.default') !== 'testing') {
-            DB::statement("ALTER TABLE users MODIFY COLUMN role VARCHAR(50) DEFAULT 'customer'");
+        if (DB::getDriverName() === 'mysql') {
+            DB::statement("ALTER TABLE users MODIFY COLUMN role VARCHAR(50) NOT NULL DEFAULT 'customer'");
         }
     }
 

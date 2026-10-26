@@ -111,9 +111,9 @@
                                     <div class="flex justify-between items-end pt-2">
                                         <div>
                                             <div class="text-2xl font-bold text-green-700">
-                                                ${{ number_format($product->price, 0) }}
+                                                {{ cop($product->price) }}
                                             </div>
-                                            <div class="text-xs text-gray-500">por unidad</div>
+                                            <div class="text-xs text-gray-500">COP por unidad</div>
                                         </div>
                                         <div class="text-sm font-semibold text-emerald-800">
                                             📦 Lleva mañana

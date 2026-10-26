@@ -21,7 +21,7 @@
                         <span class="font-semibold">Número de Pedido:</span> #{{ $order->id }}
                     </p>
                     <p class="text-gray-700 mb-2">
-                        <span class="font-semibold">Monto Total:</span> ${{ number_format($order->total_amount, 2) }}
+                        <span class="font-semibold">Monto Total:</span> {{ cop($order->total_amount) }}
                     </p>
                     <p class="text-gray-700">
                         <span class="font-semibold">Estado:</span> <span class="text-green-600 font-bold">Pagado</span>

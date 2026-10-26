@@ -37,7 +37,7 @@
                                     </div>
                                     <div>
                                         <span class="text-gray-600 font-semibold block text-xs uppercase tracking-wide">Total</span>
-                                        <span class="text-green-700 font-bold text-xl">${{ number_format($order->total_amount, 2) }}</span>
+                                        <span class="text-green-700 font-bold text-xl">{{ cop($order->total_amount) }}</span>
                                     </div>
                                     <div>
                                         <span class="text-gray-600 font-semibold block text-xs uppercase tracking-wide">Estado de Pago</span>
@@ -105,12 +105,12 @@
                                                     {{ $item->product->name ?? 'Producto Eliminado' }}
                                                 </a>
                                                 <span class="text-sm text-gray-600">
-                                                    {{ $item->quantity }} ud. × ${{ number_format($item->price, 2) }}
+                                                    {{ $item->quantity }} ud. × {{ cop($item->price) }}
                                                 </span>
                                             </div>
                                             <div class="text-right flex-shrink-0">
                                                 <div class="font-bold text-gray-900">
-                                                    ${{ number_format($item->price * $item->quantity, 2) }}
+                                                    {{ cop($item->price * $item->quantity) }}
                                                 </div>
                                             </div>
                                         </li>

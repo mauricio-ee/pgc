@@ -64,7 +64,7 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <div class="font-bold text-gray-700">${{ number_format($product->price, 2) }}</div>
+                                        <div class="font-bold text-gray-700">{{ cop($product->price) }}</div>
                                         <span class="text-xs">{{ $product->is_active ? 'Activo' : 'Inactivo' }}</span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-end gap-2">

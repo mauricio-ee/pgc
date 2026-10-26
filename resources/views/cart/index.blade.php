@@ -73,7 +73,7 @@
                                                 <div class="text-sm text-gray-500 font-medium mt-1">Vendido por: <strong class="text-gray-700">{{ $product->user->name }}</strong></div>
                                             @endif
                                             
-                                            <div class="mt-2 text-lg font-bold text-green-600">${{ number_format($product->price, 2) }} c/u</div>
+                                            <div class="mt-2 text-lg font-bold text-green-600">{{ cop($product->price) }} c/u</div>
                                         </div>
 
                                         <!-- Acciones de Cantidad -->
@@ -107,7 +107,7 @@
                             <div class="space-y-2 mb-4">
                                 <div class="flex justify-between text-gray-600 text-sm">
                                     <span>Subtotal ({{ count($cart) }} productos)</span>
-                                    <span>${{ number_format($total, 2) }}</span>
+                                    <span>{{ cop($total) }}</span>
                                 </div>
                                 
                                 <div class="flex justify-between text-gray-600 text-sm">
@@ -119,7 +119,7 @@
                             <div class="border-t border-gray-200 pt-4 mb-6">
                                 <div class="flex justify-between text-2xl font-extrabold text-green-600">
                                     <span>Total</span>
-                                    <span>${{ number_format($total, 2) }}</span>
+                                    <span>{{ cop($total) }}</span>
                                 </div>
                             </div>
 
