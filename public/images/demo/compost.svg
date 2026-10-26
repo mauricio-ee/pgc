@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" role="img" aria-labelledby="title">
+  <title id="title">Ilustración de compost para huerta</title>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#e7efdc"/><stop offset="1" stop-color="#c8d9b8"/></linearGradient><linearGradient id="sack" x2="1"><stop stop-color="#8b6847"/><stop offset=".5" stop-color="#b99061"/><stop offset="1" stop-color="#79583d"/></linearGradient></defs>
+  <rect width="600" height="480" rx="28" fill="url(#bg)"/><circle cx="300" cy="232" r="170" fill="#fff" opacity=".3"/>
+  <ellipse cx="300" cy="377" rx="150" ry="23" fill="#43523b" opacity=".17"/>
+  <path d="m218 146 28-27h108l28 27-15 219H233z" fill="url(#sack)" stroke="#6f5239" stroke-width="5"/>
+  <path d="M246 119h108l17 28H229z" fill="#72533a"/><path d="M252 127h96" stroke="#d3b58a" stroke-width="4" stroke-dasharray="6 5"/>
+  <path d="M239 195h122v105H239z" fill="#f4e8cb" stroke="#d2bd96" stroke-width="3"/>
+  <text x="300" y="228" text-anchor="middle" fill="#4e613f" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">TIERRA VIVA</text>
+  <text x="300" y="260" text-anchor="middle" fill="#68452c" font-family="Arial,sans-serif" font-size="22" font-weight="700">COMPOST</text>
+  <g fill="none" stroke="#4b8751" stroke-width="6" stroke-linecap="round"><path d="M300 286v-17m0 10c-15-20-28-12-26-1 10 7 18 5 26 1zm0-5c15-20 28-12 26-1-10 7-18 5-26 1z"/></g>
+  <g fill="#678d58"><path d="M175 272c-17-27-3-46 22-47 3 22-4 37-22 47z"/><path d="M424 195c-8-26 9-40 32-34-4 21-13 32-32 34z"/></g>
+  <text x="300" y="438" text-anchor="middle" fill="#465c3d" font-family="Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="3">NUTRE TU HUERTA</text>
+</svg>

@@ -28,6 +28,7 @@ class DemoCatalogSeederTest extends TestCase
             $this->assertSame(1, (int) $product->is_active);
             $this->assertSame(0, (int) $product->is_eco_certified);
             $this->assertStringContainsString('ficticios', $product->description);
+            $this->assertFileExists(public_path('images/' . $product->image));
         }
     }
 }

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" role="img" aria-labelledby="title">
+  <title id="title">Ilustración de plantines de albahaca</title>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#e6f2d9"/><stop offset="1" stop-color="#bad5a7"/></linearGradient><linearGradient id="pot" x2="1"><stop stop-color="#ca7145"/><stop offset=".5" stop-color="#e59a65"/><stop offset="1" stop-color="#b95c3d"/></linearGradient></defs>
+  <rect width="600" height="480" rx="28" fill="url(#bg)"/><circle cx="300" cy="229" r="170" fill="#fff" opacity=".3"/>
+  <ellipse cx="300" cy="379" rx="140" ry="22" fill="#466444" opacity=".17"/>
+  <path d="M222 264h156l-19 108H241z" fill="url(#pot)" stroke="#a65238" stroke-width="5"/>
+  <ellipse cx="300" cy="265" rx="78" ry="20" fill="#69452f" stroke="#a65238" stroke-width="5"/>
+  <path d="M300 270V138m0 114c-23-36-47-43-64-30 2 27 27 41 64 30m1-26c26-37 49-41 65-25-3 28-29 40-65 25m-1-39c-17-36-38-43-57-31 3 27 24 39 57 31m3-12c18-35 42-39 58-24-4 26-27 37-58 24" fill="#64a75c" stroke="#377b49" stroke-width="4" stroke-linejoin="round"/>
+  <g fill="none" stroke="#d6edb8" stroke-width="3" stroke-linecap="round"><path d="M300 251c-21-15-36-22-52-23m54-4c22-16 39-24 54-23m-56-13c-14-16-27-23-41-26m44 9c16-16 29-23 44-24"/></g>
+  <g fill="#fff" opacity=".75"><circle cx="193" cy="180" r="6"/><circle cx="406" cy="155" r="7"/><circle cx="419" cy="292" r="5"/></g>
+  <text x="300" y="438" text-anchor="middle" fill="#3e6a43" font-family="Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="3">CULTIVA EN CASA</text>
+</svg>

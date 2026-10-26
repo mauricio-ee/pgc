@@ -70,7 +70,7 @@
                                 <!-- Imagen con Overlay -->
                                 <div class="relative h-64 overflow-hidden rounded-lg bg-gray-100 mb-3 shadow-md hover:shadow-xl transition-shadow">
                                     @if ($product->image)
-                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                        <img src="{{ str_starts_with($product->image, 'demo/') ? asset('images/' . $product->image) : asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                     @else
                                         <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-green-100 to-emerald-100">
                                             <span class="text-5xl">🍃</span>

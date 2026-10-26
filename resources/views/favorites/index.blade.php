@@ -20,7 +20,7 @@
                             <a href="{{ route('products.show', $product) }}" class="block">
                                 <div class="flex h-48 items-center justify-center bg-emerald-50">
                                     @if($product->image)
-                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
+                                        <img src="{{ str_starts_with($product->image, 'demo/') ? asset('images/' . $product->image) : asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
                                     @else
                                         <span class="text-5xl" aria-hidden="true">🍃</span>
                                     @endif

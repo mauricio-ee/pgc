@@ -51,7 +51,7 @@
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-64">
                                         <div class="flex flex-col items-center">
                                             @if ($product->image)
-                                                <img src="{{ asset('storage/' . $product->image) }}" class="h-24 w-24 object-cover rounded-md mb-2 shadow-sm">
+                                                <img src="{{ str_starts_with($product->image, 'demo/') ? asset('images/' . $product->image) : asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="h-24 w-24 object-cover rounded-md mb-2 shadow-sm">
                                             @else
                                                 <div class="h-24 w-24 bg-gray-100 flex items-center justify-center rounded-md mb-2 text-3xl">🍃</div>
                                             @endif

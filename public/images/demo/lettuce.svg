@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" role="img" aria-labelledby="title">
+  <title id="title">Ilustración de lechuga fresca</title>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#e6f4d9"/><stop offset="1" stop-color="#c5dfb0"/></linearGradient><linearGradient id="leaf" x2=".8" y2="1"><stop stop-color="#a9d778"/><stop offset="1" stop-color="#4a9a55"/></linearGradient></defs>
+  <rect width="600" height="480" rx="28" fill="url(#bg)"/><circle cx="300" cy="232" r="170" fill="#fff" opacity=".3"/>
+  <ellipse cx="300" cy="375" rx="165" ry="25" fill="#477a45" opacity=".16"/>
+  <g fill="url(#leaf)" stroke="#46854b" stroke-width="4">
+    <path d="M301 354C177 350 140 281 170 202c24-63 83-74 130-21 47-53 106-42 130 21 30 79-7 148-129 152z"/>
+    <path d="M296 346c-85-40-116-112-72-170 32-43 75-28 82 21 23-61 75-55 97-4 31 73-9 127-107 153z"/>
+    <path d="M304 348c85-40 116-112 72-170-32-43-75-28-82 21-23-61-75-55-97-4-31 73 9 127 107 153z"/>
+    <path d="M299 349c-54-68-45-137 3-167 47 30 57 99-3 167z"/>
+  </g>
+  <g fill="none" stroke="#e1f2c7" stroke-width="5" stroke-linecap="round">
+    <path d="M300 337c-29-56-45-110-46-151M299 338c-57-42-89-77-106-119M301 338c28-56 44-110 45-151M302 338c56-42 88-77 105-119M300 344V210"/>
+  </g>
+  <g fill="#fff" opacity=".75"><circle cx="191" cy="174" r="7"/><circle cx="402" cy="189" r="5"/><circle cx="351" cy="125" r="6"/></g>
+  <text x="300" y="438" text-anchor="middle" fill="#376b40" font-family="Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="3">FRESCO DEL HUERTO</text>
+</svg>

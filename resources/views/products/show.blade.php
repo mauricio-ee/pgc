@@ -27,7 +27,7 @@
                 <div class="lg:col-span-3">
                     <div class="relative aspect-square bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl overflow-hidden shadow-lg mb-6">
                         @if($product->image)
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                            <img src="{{ str_starts_with($product->image, 'demo/') ? asset('images/' . $product->image) : asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
                         @else
                             <div class="w-full h-full flex items-center justify-center">
                                 <span class="text-7xl">🍃</span>
@@ -257,4 +257,3 @@
         </div>
     </div>
 </x-app-layout>
-

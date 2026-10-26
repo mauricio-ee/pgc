@@ -47,7 +47,7 @@
                                         <!-- Imagen -->
                                         <div class="flex-shrink-0 w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center border border-gray-200">
                                             @if($product->image)
-                                                <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-full object-cover">
+                                                <img src="{{ str_starts_with($product->image, 'demo/') ? asset('images/' . $product->image) : asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
                                             @else
                                                 <span class="text-2xl">🍃</span>
                                             @endif
