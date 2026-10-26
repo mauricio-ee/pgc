@@ -17,4 +17,6 @@ El Blueprint configura una aplicación Laravel y una base de datos PostgreSQL en
 4. Revisa que el servicio web y PostgreSQL tengan el plan **Free** antes de crear el Blueprint. No añadas una tarjeta para esta demo.
 5. Espera a que terminen la construcción y las migraciones. La base comienza vacía; los datos de SQLite local y las imágenes locales no se copian.
 
+El script de inicio valida el `APP_KEY` generado por Render y lo adapta al formato y longitud que espera Laravel. El valor de origen sigue siendo un secreto administrado por Render y la clave resultante permanece estable entre reinicios.
+
 Las credenciales de Mercado Pago y los datos bancarios no se incluyen en el repositorio ni en el Blueprint. Por tanto, no configures pagos reales ni uses esta demo para recibir pedidos o transferencias. Para una tienda real se necesita alojamiento y almacenamiento persistentes, correo SMTP y configurar credenciales privadas en Render.
