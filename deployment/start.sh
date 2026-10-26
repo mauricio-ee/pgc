@@ -25,5 +25,6 @@ mkdir -p storage/app/public storage/framework/cache storage/framework/sessions s
 chown -R www-data:www-data storage bootstrap/cache
 
 php artisan migrate --force
+php artisan db:seed --class=DemoCatalogSeeder --force
 
 exec apache2-foreground
