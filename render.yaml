@@ -2,20 +2,16 @@ databases:
   - name: ecoventa-db
     databaseName: ecoventa
     user: ecoventa
-    plan: basic-256mb
+    plan: free
 
 services:
   - type: web
     name: ecoventa
     runtime: docker
-    plan: 0.5c-512mb
+    plan: free
     dockerfilePath: ./Dockerfile
     dockerContext: .
     healthCheckPath: /
-    disk:
-      name: ecoventa-uploads
-      mountPath: /var/www/html/storage/app/public
-      sizeGB: 1
     envVars:
       - key: APP_ENV
         value: production
@@ -39,15 +35,3 @@ services:
         value: database
       - key: FILESYSTEM_DISK
         value: public
-      - key: BANK_NAME
-        sync: false
-      - key: BANK_ACCOUNT
-        sync: false
-      - key: BANK_CODE
-        sync: false
-      - key: MERCADO_PAGO_ACCESS_TOKEN
-        sync: false
-      - key: MERCADO_PAGO_PUBLIC_KEY
-        sync: false
-      - key: MERCADO_PAGO_WEBHOOK_SECRET
-        sync: false
